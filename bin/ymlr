@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "ymlr"
+
+first_file = ARGV[0]
+second_file = ARGV[1]
+
+ymlr = Ymlr.new
+ymlr.find_duplicates(first_file, second_file)
+
+
