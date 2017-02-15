@@ -5,7 +5,14 @@ RSpec.describe Ymlr do
     expect(Ymlr::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "able to find duplicates" do
+    finder = Ymlr::DuplicatesFinder.new
+    result = finder.find_duplicates(
+      "spec/fixtures/sample1_simple.yml",
+      "spec/fixtures/sample2_simple.yml",
+    )
+    expect(result).not_to be_nil
+    puts result.inspect
+    expect(result.duplicates.keys).to match("root.keyB")
   end
 end
