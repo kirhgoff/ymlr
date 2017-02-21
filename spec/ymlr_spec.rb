@@ -12,7 +12,6 @@ RSpec.describe Ymlr do
       "spec/fixtures/sample2_simple.yml",
     )
     expect(result).not_to be_nil
-    puts result.inspect
-    expect(result.duplicates.keys).to match("root.keyB")
+    expect(result.duplicates.keys).to contain_exactly(".root.keyB")
   end
 end
