@@ -3,7 +3,7 @@ require "yaml"
 module Ymlr
 
   class DuplicatesResults
-    attr_reader :duplicates, :overrides, :files
+    attr_reader :duplicates, :overrides, :missed_first, :missed_second, :files
     
     def initialize(first_file, second_file)
       @files = [first_file, second_file]
@@ -31,9 +31,9 @@ module Ymlr
   end
 
   class DuplicatesFinder 
-    def flat_hash(hash, k = "")
+    def flat_hash(hash, k = [])
       return {k => hash} unless hash.is_a?(Hash)
-      hash.inject({}){ |h, v| h.merge! flat_hash(v[-1], "#{k}.#{v[0]}") }
+      hash.inject({}){ |h, v| h.merge! flat_hash(v[-1], k + [v[0]]) }
     end
 
     def load_yaml(file_name) 
